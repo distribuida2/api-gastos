@@ -15,3 +15,33 @@ Es una API REST muy simple, realizada con FastAPI, con fines académicos.
 1. Crear tests de controlador
 2. Documentar cómo ejecutarlo
 3. Integrarlo con Github Actions
+
+## ¿Cómo podemos hacer un request desde otro sistema?
+
+Más allá de varias configuraciones y mejoras que se pueden hacer, en el snippet de abajo se ve un ejemplo de integración de cómo crear un gasto desde otro sistema Python mediante la librería [requests](https://requests.readthedocs.io/en/latest/)
+
+```python
+import requests
+
+
+def post_expenditure(username, expenditure_dict):
+
+    # armamos un diccionario con los campos del objeto JSON a transmitir en el request body
+    data = {}
+    data["username"] = username
+    data["amount"] = expenditure_dict["amount"]
+    data["category"] = expenditure_dict["category"]
+    data["description"] = expenditure_dict["description"]
+    data["username"] = username
+
+    # suponiendo que tenemos el servidor escuchando en el puerto 8000 del localhost
+    response = requests.post("http://localhost:8000/expenditure", json=data)
+
+    if response.status_code == 422:
+        raise ValueError("Datos errónos para la API")
+
+    if response.status_code != 200:
+        raise ConnectionError("Error de conexión con la API")
+
+    return response
+```
