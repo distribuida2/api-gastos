@@ -1,0 +1,6 @@
+fastapi[all]
+sqlalchemy[mypy]
+mypy
+flake8
+black
+alembic
