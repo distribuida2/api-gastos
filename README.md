@@ -12,9 +12,14 @@ Es una API REST muy simple, realizada con FastAPI, con fines académicos.
 
 ## Trabajo pendiente
 
-1. Crear tests de controlador
-2. Documentar cómo ejecutarlo
-3. Integrarlo con Github Actions
+1. Integrarlo con Github Actions
+
+
+## Tests
+
+Los ejecutamos con [pytest](https://docs.pytest.org). O sea, directamente vamos a la línea de comando y usando el virtual environment correcto ejecutamos `pytest`.
+
+Algo para tener en cuenta al momento de ver cómo están organizados es el uso de [fixtures](https://docs.pytest.org/en/7.1.x/how-to/fixtures.html)
 
 ## ¿Cómo podemos hacer un request desde otro sistema?
 
