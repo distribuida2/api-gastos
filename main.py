@@ -1,5 +1,5 @@
 from database import SessionLocal, engine
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, status
 from sqlalchemy.orm import Session
 
 import repository
@@ -21,7 +21,7 @@ def get_db():
         db.close()
 
 
-@app.post("/expenditure/")
+@app.post("/expenditure/", status_code=status.HTTP_201_CREATED, tags=["gastos"])
 async def create_expenditure(
     expenditure: schemas.ExpenditureCreate, db: Session = Depends(get_db)
 ):
@@ -29,9 +29,21 @@ async def create_expenditure(
     return repository.create_expenditure(db, expenditure, user)
 
 
-@app.post("/user/")
+@app.post(
+    "/user/",
+    responses={
+        status.HTTP_400_BAD_REQUEST: {
+            "content": {"application/json": {}},
+            "description": "Username ya registrado",
+        }
+    },
+    tags=["usuarios"],
+    status_code=status.HTTP_201_CREATED,
+)
 async def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db_user = repository.get_user_by_username(db, username=user.username)
     if db_user:
-        raise HTTPException(status_code=400, detail="Usuario ya registrado")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Username ya registrado"
+        )
     return repository.create_user(db=db, user=user)
