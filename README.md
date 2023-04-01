@@ -8,7 +8,7 @@ Es una API REST muy simple, realizada con FastAPI, con fines académicos.
 
 1. Crear un virtual environment
 2. Dentro de ese venv, ejecutar `pip install -r requirements.txt`
-3. Y correr el servidor con `uvicorn main:app --reload`
+3. Y correr el servidor con `uvicorn main:app --reload --host 0.0.0.0 --port 8000`
 
 ## Trabajo pendiente
 

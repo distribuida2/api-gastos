@@ -18,6 +18,7 @@ class User(Base):
 
 
 class Expenditure(Base):
+    __allow_unmapped__ = True
     __tablename__ = "expenditure"
 
     id = Column(Integer, primary_key=True, index=True)
