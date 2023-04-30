@@ -1,0 +1,13 @@
+services:
+  api-gastos-1:
+    build:
+      context: .
+  api-gastos-2:
+    build:
+      context: .
+  lb:
+    image: nginx:1.14.2
+    volumes:
+      - ./lb-nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8000:80
