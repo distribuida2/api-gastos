@@ -14,7 +14,6 @@ Es una API REST muy simple, realizada con FastAPI, con fines académicos.
 
 1. Integrarlo con Github Actions
 
-
 ## Tests
 
 Los ejecutamos con [pytest](https://docs.pytest.org). O sea, directamente vamos a la línea de comando y usando el virtual environment correcto ejecutamos `pytest`.

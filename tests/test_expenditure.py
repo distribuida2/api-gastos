@@ -27,7 +27,7 @@ class TestExpenditure:
             category="categoria test",
             username="not real test",
         )
-        response = client.post("/expenditure/", json=expenditure.dict())
+        response = client.post("/expenditure/", json=expenditure.model_dump())
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
 
@@ -46,7 +46,7 @@ class TestExpenditure:
             category="categoria test",
             username=self.username,
         )
-        response = client.post("/expenditure/", json=expenditure.dict())
+        response = client.post("/expenditure/", json=expenditure.model_dump())
         assert response.status_code == status.HTTP_201_CREATED
 
         amount_after = len(db.query(Expenditure).all())
